@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Animation</title>
+    
+    <style>
+
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden; /* Disable horizontal scrolling */
+    }
+
+.container,
+.container1 {
+    height: 420px; /* Adjust the height as needed */
+    display: flex;
+    position: relative;
+    /* position: relative; */
+    /* justify-content: space-evenly; */
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    background-color: #ccc;
+    position: absolute;
+    top: 50px;
+    left: 200px;
+    transition: transform 0.5s ease;
+    border-radius: 50%;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+}
+.box:hover {
+    transform: scale(1.1);
+  }
+#box2 {
+    left: 700px;
+    background-color: red;
+}
+
+#box3 {
+    left: 1200px;
+    background-color: green;
+}
+
+#box4 {
+    background-color: goldenrod;
+}
+
+#box5 {
+    left: 700px;
+    background-color: greenyellow;
+}
+
+#box6 {
+    left: 1200px;
+    background-color: purple;
+}
+
+.move1 {
+    animation: slideInFromLeft 5s ease;
+}
+
+.move2 {
+    animation: slideInFromLeft1 5s ease;
+}
+
+.move3 {
+    animation: slideInFromRight 5s ease;
+}
+
+.move4 {
+    animation: slideInFromRight1 5s ease;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        margin-left: 0px;
+    }
+
+    /* 50% {
+        margin-left: 500px;
+    } */
+
+    100% {
+        margin-left: 1000px;
+    }
+}
+
+@keyframes slideInFromLeft1 {
+    0% {
+        margin-left: 0px;
+    }
+
+    100% {
+        margin-left: 500px;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        margin-left: 0px;
+    }
+
+    /* 50% {
+        margin-left: -500px;
+    } */
+
+    100% {
+        margin-left: -1000px;
+    }
+}
+
+@keyframes slideInFromRight1 {
+    0% {
+        margin-left: 0px;
+    }
+
+    100% {
+        margin-left: -500px;
+    }
+}
+    </style>
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="box" id="box1"></div>
+        <div class="box" id="box2"></div>
+        <div class="box" id="box3"></div>
+    </div>
+    <div class="container1">
+        <div class="box" id="box4"></div>
+        <div class="box" id="box5"></div>
+        <div class="box" id="box6"></div>
+    </div>
+
+
+
+
+
+    <script>
+          // Get references to box1, box2, and box3 elements
+  const box1 = document.getElementById('box1');
+  const box2 = document.getElementById('box2');
+  const box3 = document.getElementById('box5');
+  const box4 = document.getElementById('box6');
+
+  let lastScrollTop = 0;
+
+  // Add event listener for scroll event on window
+  window.addEventListener('scroll', () => {
+      const st = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (st > lastScrollTop) {
+          // Downscroll code
+          box1.classList.add('move1');
+          box2.classList.add('move2');
+          box3.classList.add('move4');
+          box4.classList.add('move3');
+      } else {
+          // Upscroll code
+          box1.classList.remove('move1');
+          box2.classList.remove('move2');
+          box3.classList.remove('move4');
+          box4.classList.remove('move3');
+      }
+
+      lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+  });
+    </script>
+</body>
+</html>
